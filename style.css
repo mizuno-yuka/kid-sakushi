@@ -1,0 +1,173 @@
+/* フォント：LINE Seed JP（SIL Open Font License。fonts/OFL.txt 参照） */
+@font-face{font-family:"LINE Seed JP";font-weight:400;font-display:swap;src:url("fonts/LINESeedJP-Regular.ttf") format("truetype")}
+@font-face{font-family:"LINE Seed JP";font-weight:700;font-display:swap;src:url("fonts/LINESeedJP-Bold.ttf") format("truetype")}
+@font-face{font-family:"LINE Seed JP";font-weight:800;font-display:swap;src:url("fonts/LINESeedJP-ExtraBold.ttf") format("truetype")}
+
+:root{
+  /* 色覚の多様性に配慮した配色（Okabe-Ito をもとに、おちついた トーンに） */
+  --paper:#f6f1e4;
+  --ink:#1f2a44;
+  --vermilion:#D55E00;
+  --orange:#E69F00;
+  --sky:#56B4E9;
+  --green:#009E73;
+  --blue:#0072B2;
+  --slate:#4a5670;
+  --line:.4vh;
+  --radius:1.6vw;     /* カードの かどの まるみ（ぜんぶ おなじ） */
+  --shadow:.7vh .7vh 0 var(--ink);
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{
+  font-family:"LINE Seed JP","UD Digi Kyokasho N-R","BIZ UDPGothic","Yu Gothic UI","Meiryo",sans-serif;
+  font-weight:700;
+  color:var(--ink);
+  background-color:var(--paper);
+  /* ハーフトーンの ドット もよう */
+  background-image:radial-gradient(rgba(31,42,68,.07) 18%,transparent 20%);
+  background-size:2.6vh 2.6vh;
+  overflow:hidden;
+}
+[hidden]{display:none !important}
+rt{font-size:.45em;font-weight:700}
+
+/* ---------- もくじ ---------- */
+#home{
+  height:100vh;display:flex;flex-direction:column;
+  padding:2vh 3vw 2.4vh;
+}
+#home h1{
+  margin:0 auto 2.4vh;
+  font-weight:800;
+  font-size:clamp(40px,6.4vw,110px);line-height:1.15;letter-spacing:.08em;
+  color:var(--ink);
+  text-shadow:.8vh .8vh 0 var(--orange);
+  transform:rotate(-1.5deg);
+}
+#cards{
+  flex:1;min-height:0;
+  display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,1fr);
+  gap:3vh 2vw;padding:0 .6vw 1vh;
+}
+.card{
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  border:var(--line) solid var(--ink);border-radius:var(--radius);
+  background:color-mix(in srgb,var(--c) 24%,#fff);color:var(--ink);
+  box-shadow:var(--shadow);
+  font:inherit;font-weight:800;cursor:pointer;padding:0 0 1.2vh;gap:1.2vh;
+  transition:transform .12s, box-shadow .12s;
+}
+.card:nth-child(odd){transform:rotate(-1.2deg)}
+.card:nth-child(even){transform:rotate(1deg)}
+.card:hover,.card:focus-visible{
+  transform:translate(-.3vh,-.5vh) rotate(0) scale(1.03);
+  box-shadow:1.1vh 1.3vh 0 var(--ink);outline:none;
+}
+/* カードいっぱいの もよう */
+.card .art{position:relative;flex:1;min-height:0;width:100%;display:block;border-bottom:var(--line) solid var(--ink)}
+.card .art svg{width:100%;height:100%;display:block}
+/* 番号：丸バッジは つかわず、ふちどり文字で */
+.card .num{
+  position:absolute;top:.4vh;left:.9vw;
+  font-size:clamp(26px,3.6vw,64px);font-weight:800;line-height:1.1;
+  color:var(--ink);
+  -webkit-text-stroke:.9vh #fff;paint-order:stroke fill;
+}
+/* 題名：白い ふだ（かどの まるみは カードと おなじ） */
+.card .name{
+  position:relative;flex:none;
+  width:88%;padding:.7vh .5vw;
+  background:#fff;border:var(--line) solid var(--ink);border-radius:var(--radius);
+  box-shadow:.4vh .4vh 0 var(--ink);
+  font-size:clamp(18px,2.4vw,44px);line-height:1.3;text-align:center;
+  word-break:keep-all;text-wrap:balance;
+}
+
+/* ---------- たいけん ---------- */
+#viewer{
+  height:100vh;display:flex;flex-direction:column;
+  padding:1.8vh 2vw 2vh;gap:1.6vh;
+}
+#viewer header{display:flex;align-items:center;gap:2vw}
+#title{
+  margin:0;flex:1;
+  font-weight:800;font-size:clamp(24px,3.4vw,58px);
+  color:var(--ink);
+  text-shadow:.4vh .4vh 0 var(--orange);
+}
+#dots{display:flex;gap:.7vw}
+#dots span{
+  width:clamp(14px,1.7vw,28px);height:clamp(14px,1.7vw,28px);
+  border-radius:50%;background:#fff;border:var(--line) solid var(--ink);
+}
+#dots span.on{background:var(--blue);transform:scale(1.25)}
+#dots span.done{background:var(--sky)}
+#stage{
+  flex:1;min-height:0;
+  border:calc(var(--line) * 1.4) solid var(--ink);
+  border-radius:var(--radius);overflow:hidden;
+  background:#fff;
+  box-shadow:1vh 1vh 0 var(--ink);
+  display:flex;
+}
+#stage svg{width:100%;height:100%;display:block}
+#stage svg text{font-family:inherit}
+footer{display:flex;flex-direction:column;gap:1.4vh}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:2vw}
+#text{
+  margin:0;text-align:center;
+  padding:1.2vh 1.6vw;
+  background:#fff;border:var(--line) solid var(--ink);border-radius:var(--radius);
+  box-shadow:.6vh .6vh 0 var(--ink);
+  min-height:13vh;
+  font-size:clamp(22px,2.7vw,48px);line-height:1.6;font-weight:700;
+  word-break:keep-all;overflow-wrap:anywhere;text-wrap:balance;
+}
+.btn{
+  font:inherit;font-weight:800;cursor:pointer;
+  font-size:clamp(20px,2.5vw,42px);
+  border:var(--line) solid var(--ink);border-radius:99px;padding:1.3vh 2vw;
+  box-shadow:.7vh .7vh 0 var(--ink);
+  color:#fff;white-space:nowrap;
+}
+.btn:active{transform:translate(.5vh,.5vh);box-shadow:.2vh .2vh 0 var(--ink)}
+.btn.next{background:var(--blue)}
+.btn.prev{background:var(--slate)}
+.btn.ghost{background:var(--slate);font-size:clamp(16px,1.8vw,30px);padding:.8vh 1.4vw}
+.btn.prev.off{visibility:hidden}
+
+/* SVG の ふわっと あらわれる アニメ */
+.pop{animation:pop .7s ease both}
+@keyframes pop{from{opacity:0}to{opacity:1}}
+.pulse{animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* ベンハムのコマ：ゆっくり回転（デモ用。実物を回すと見え方が変わるよ） */
+.spin{transform-box:fill-box;transform-origin:center;animation:spin 3s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media (max-aspect-ratio: 4/3){
+  #cards{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(5,1fr)}
+}
+@media (prefers-reduced-motion: reduce){
+  .pop,.pulse,.spin{animation:none}
+}
+
+/* ベンハムのコマ：がびょうが うえから したへ */
+.pin{animation:pin 2.6s ease-in infinite}
+@keyframes pin{0%{transform:translateY(-150px);opacity:0}15%{opacity:1}60%,100%{transform:translateY(0);opacity:1}}
+@media (prefers-reduced-motion: reduce){.pin{animation:none}}
+
+/* どちらが大きい？：2つの丸が まんなかで かさなる */
+.slideL{animation:slideL 2.2s ease-in-out .6s both}
+.slideR{animation:slideR 2.2s ease-in-out .6s both}
+@keyframes slideL{to{transform:translateX(230px)}}
+@keyframes slideR{to{transform:translateX(-230px)}}
+.late{animation:pop .7s ease 2.9s both}
+@media (prefers-reduced-motion: reduce){
+  .slideL{animation:none;transform:translateX(230px)}
+  .slideR{animation:none;transform:translateX(-230px)}
+  .late{animation:none}
+}
